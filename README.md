@@ -1,7 +1,7 @@
 # Upclid
 
 ## Description
-Upclid is the client, which reports pending updates, wanted reboots, locked packages to [Upman](https://github/flat235/upman).
+Upclid is the client, which reports pending updates, wanted reboots, locked packages to [Upman](https://github.com/flat235/upman).
 
 ## Build / Installation
  - `mix deps.get`
