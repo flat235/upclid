@@ -1,0 +1,15 @@
+[Unit]
+Description=upclid: the upman client
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/upclid
+ExecStart=/opt/upclid/bin/upclid foreground
+ExecStop=/opt/upclid/bin/upclid stop
+ExecReload=/opt/upclid/bin/upclid restart
+Restart=on-failure
+Environment="HOME=/opt/upclid"
+
+[Install]
+WantedBy=multi-user.target
