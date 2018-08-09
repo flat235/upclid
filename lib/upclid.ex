@@ -10,7 +10,7 @@ defmodule Upclid do
   def start_link(opts \\ []) do
     default = %{
       "hostname" => System.cmd("hostname", ["-f"]) |> elem(0) |> String.trim(),
-      "url" => "http://upman:4000/api/server/",
+      "url" => "http://upman:4000/api",
       "every" => "300"
     }
     config = File.read!("/etc/upclid.conf")
@@ -38,13 +38,13 @@ defmodule Upclid do
   end
 
   def report(data, name, url) do
-    {:ok, _} = HTTPoison.post "#{url}/#{name}",
+    {:ok, _} = HTTPoison.post "#{url}/server/#{name}",
       Poison.encode!(data),
       [{"Content-Type", "application/json"}]
   end
 
   def clearance(name, url) do
-    HTTPoison.get!("#{url}/#{name}")
+    HTTPoison.get!("#{url}/clearance/#{name}")
     |> Map.get(:body)
     |> Poison.decode!()
     |> inspect()
