@@ -8,7 +8,7 @@ defmodule Upclid.Collector do
     end
   end
 
-  @callback updates() :: [%{"package": String.t, "current": String.t, "new": String.t}]
+  @callback updates() :: [%{package: String.t, current: String.t, new: String.t}]
   @callback locked() :: [String.t]
   @callback reboot_needed() :: true | false
   @callback customfacts() :: [Map.t]
