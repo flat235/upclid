@@ -52,10 +52,10 @@ defmodule Upclid do
     |> inspect()
     |> Logger.info()
 
-    if Map.get clearances, :reboot, false do
+    if Map.get(clearances, :reboot, "false") == "true" do
       Logger.module_info "reboot authorized"
     end
-    if Map.get clearances, :update, false do
+    if Map.get(clearances, :update, "false") == "true" do
       Logger.module_info "update authorized"
     end
   end
