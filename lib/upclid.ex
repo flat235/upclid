@@ -52,12 +52,15 @@ defmodule Upclid do
     |> inspect()
     |> Logger.info()
 
-    if Map.get(clearances, "reboot", "false") == "true" do
-      Logger.info "reboot authorized"
-    end
     if Map.get(clearances, "update", "false") == "true" do
       Logger.info "update authorized"
+      Upclid.Action.update()
     end
+    if Map.get(clearances, "reboot", "false") == "true" do
+      Logger.info "reboot authorized"
+      Upclid.Action.reboot()
+    end
+
   end
 
 

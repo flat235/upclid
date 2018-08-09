@@ -12,4 +12,28 @@ defmodule Upclid.Action do
   @callback do_update() :: {Collectable.t, non_neg_integer()}
   @callback do_lock(String.t) :: {Collectable.t, non_neg_integer()}
   @callback do_unlock(String.t) :: {Collectable.t, non_neg_integer()}
+
+  def reboot do
+    os = Upclid.Os.osdetect()
+    os_impl = Upclid.Os.impl_for_os! os["id"]
+    os_impl.do_reboot
+  end
+
+  def update do
+    os = Upclid.Os.osdetect()
+    os_impl = Upclid.Os.impl_for_os! os["id"]
+    os_impl.do_update
+  end
+
+  def lock(pkg) do
+    os = Upclid.Os.osdetect()
+    os_impl = Upclid.Os.impl_for_os! os["id"]
+    os_impl.do_lock pkg
+  end
+
+  def unlock(pkg) do
+    os = Upclid.Os.osdetect()
+    os_impl = Upclid.Os.impl_for_os! os["id"]
+    os_impl.do_unlock pkg
+  end
 end
