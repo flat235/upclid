@@ -44,11 +44,20 @@ defmodule Upclid do
   end
 
   def clearance(name, url) do
-    HTTPoison.get!("#{url}/clearance/#{name}")
+    clearances = HTTPoison.get!("#{url}/clearance/#{name}")
     |> Map.get(:body)
     |> Poison.decode!()
+
+    clearances
     |> inspect()
     |> Logger.info()
+
+    if Map.get clearances, :reboot, false do
+      Logger.module_info "reboot authorized"
+    end
+    if Map.get clearances, :update, false do
+      Logger.module_info "update authorized"
+    end
   end
 
 
