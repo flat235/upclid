@@ -40,7 +40,7 @@ defmodule Upclid.Os.Debian do
   # Action implementation
 
   def do_update do
-    System.cmd("sudo", ["apt-get", "-y", "-o", "Dpkg::Options::=\"--force-confdef\"", "-o", "Dpkg::Options::=\"--force-confold\"" ,"dist-upgrade"])
+    System.cmd("sudo", ["apt-get", "-y", "-o", "Dpkg::Options::=\"--force-confdef\"", "-o", "Dpkg::Options::=\"--force-confold\"" ,"dist-upgrade"], env: [{"DEBIAN_FRONTEND", "noninteractive"}])
   end
 
   def do_lock(pkg) do
