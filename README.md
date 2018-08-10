@@ -6,7 +6,7 @@ Upclid is the client, which reports pending updates, wanted reboots, locked pack
 ## Build / Installation
  - `mix deps.get`
  - `MIX_ENV=prod mix release`
- - extract `_build/prod/rel/upman/releases/0.0.1/upman.tar.gz` to `/opt/upclid`
+ - extract `_build/prod/rel/upclid/releases/0.1.0/upclid.tar.gz` to `/opt/upclid`
  - copy `upclid.conf` to `/etc` and customize the url
  - copy `upclid.service` to `/etc/systemd/system/`
  - enable and start the service
@@ -17,11 +17,11 @@ Upclid is the client, which reports pending updates, wanted reboots, locked pack
  - sending information about locked packages
  - debian-based-distros supported
  - centos / RHEL(probably...) supported
+ - executing updates
+ - executing reboot
  
 ## Planned features
  - (un)locking packages
- - executing updates
- - executing reboot
  - more facts
  - more distributions
 
