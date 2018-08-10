@@ -42,7 +42,7 @@ defmodule Upclid.Os.Debian do
 
   def do_update do
     res = :os.cmd('DEBIAN_FRONTEND=noninteractive sudo --preserve-env apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade')
-    Logger.info(inspect(res))
+    Logger.info(res)
   end
 
   def do_lock(pkg) do
