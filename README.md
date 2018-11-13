@@ -19,9 +19,11 @@ Upclid is the client, which reports pending updates, wanted reboots, locked pack
  - centos / RHEL(probably...) supported
  - executing updates
  - executing reboot
- 
-## Planned features
+
+## Features in development
  - (un)locking packages
+
+## Planned features
  - more facts
  - more distributions
 
