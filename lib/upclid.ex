@@ -56,6 +56,16 @@ defmodule Upclid do
       Logger.info "update authorized"
       Upclid.Action.update()
     end
+    upkg = Map.get(clearances, "unlock", "")
+    if upkg != "" do
+      Logger.info("unlock authorized: " <> upkg)
+      Upclid.Action.unlock(upkg)
+    end
+    lpkg = Map.get(clearances, "lock", "")
+    if lpkg != "" do
+      Logger.info("lock authorized: " <> lpkg)
+      Upclid.Action.lock(lpkg)
+    end
     if Map.get(clearances, "reboot", "false") == "true" do
       Logger.info "reboot authorized"
       Upclid.Action.reboot()
