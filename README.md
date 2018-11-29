@@ -6,7 +6,7 @@ Upclid is the client, which reports pending updates, wanted reboots, locked pack
 ## Build / Installation
  - `mix deps.get`
  - `MIX_ENV=prod mix release`
- - extract `_build/prod/rel/upclid/releases/0.1.0/upclid.tar.gz` to `/opt/upclid`
+ - extract `_build/prod/rel/upclid/releases/${VERSION}/upclid.tar.gz` to `/opt/upclid`
  - copy `upclid.toml` to `/etc` and customize the url
  - copy `upclid.service` to `/etc/systemd/system/`
  - enable and start the service
