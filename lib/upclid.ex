@@ -7,23 +7,28 @@ defmodule Upclid do
     {:ok, args}
   end
 
-  def start_link(opts \\ []) do
+  def start_link(_) do
     default = %{
       "hostname" => System.cmd("hostname", ["-f"]) |> elem(0) |> String.trim(),
       "url" => "http://upman:4000/api",
       "every" => "300"
     }
-    config = File.read!("/etc/upclid.conf")
+    config = try do
+      File.read!("/etc/upclid.conf")
     |> String.split("\n")
     |> Enum.filter(fn (line) -> line != "" end)
     |> Enum.map(fn (line) -> String.split(line, "=") end)
     |> Enum.map(fn ([key, val]) -> %{key => val} end)
     |> Enum.reduce(fn (cur, acc) -> Map.merge(acc, cur) end)
+    rescue
+      _ -> %{}
+    end
+
 
     temp = Map.merge(default, config)
     state = %{temp | "every" => String.to_integer(Map.get(temp, "every"))}
     Logger.info("initialized with " <> inspect(state))
-    GenServer.start(__MODULE__, state, opts)
+    GenServer.start_link(__MODULE__, state, name: __MODULE__)
   end
 
   def handle_info(:report, state) do
