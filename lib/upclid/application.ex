@@ -10,7 +10,7 @@ defmodule Upclid.Application do
     children = [
       # Starts a worker by calling: Upclid.Worker.start_link(arg)
       # {Upclid.Worker, arg},
-      {Upclid, []}
+      {Upclid.Reporter, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
