@@ -47,6 +47,9 @@ end
 
 release :upclid do
   set version: current_version(:upclid)
+  set config_providers: [
+    {Toml.Provider, [path: "/etc/upclid.toml"]}
+  ]
   set applications: [
     :runtime_tools
   ]

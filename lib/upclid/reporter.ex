@@ -8,27 +8,13 @@ defmodule Upclid.Reporter do
   end
 
   def start_link(_) do
-    default = %{
+    config = %{
       "hostname" => System.cmd("hostname", ["-f"]) |> elem(0) |> String.trim(),
-      "url" => "http://upman:4000/api",
-      "every" => "300"
+      "url" => Application.get_env(:upclid, :url, "http://upman:4000/api"),
+      "every" => Application.get_env(:upclid, :every, 600)
     }
-    config = try do
-      File.read!("/etc/upclid.conf")
-    |> String.split("\n")
-    |> Enum.filter(fn (line) -> line != "" end)
-    |> Enum.map(fn (line) -> String.split(line, "=") end)
-    |> Enum.map(fn ([key, val]) -> %{key => val} end)
-    |> Enum.reduce(fn (cur, acc) -> Map.merge(acc, cur) end)
-    rescue
-      _ -> %{}
-    end
-
-
-    temp = Map.merge(default, config)
-    state = %{temp | "every" => String.to_integer(Map.get(temp, "every"))}
-    Logger.info("initialized with " <> inspect(state))
-    GenServer.start_link(__MODULE__, state, name: __MODULE__)
+    Logger.info("initialized with " <> inspect(config))
+    GenServer.start_link(__MODULE__, config, name: __MODULE__)
   end
 
   def handle_info(:report, state) do
