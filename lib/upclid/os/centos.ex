@@ -5,9 +5,10 @@ defmodule Upclid.Os.CentOS do
   # Collector implementation
 
   def updates() do
-    System.cmd("yum", ["check-update", "-q"])
+    System.cmd("yum", ["list", "updates", "-q"])
     |> elem(0)
     |> String.split("\n")
+    |> Enum.drop(1)
     |> Enum.filter(fn (line) -> line != "" end)
     |> Enum.map(fn (line) -> String.split(line) end)
     |> Enum.map(fn ([pkg, version, _repo]) -> %{"package" => String.split(pkg, ".") |> List.first(), "new" => version, "current" => "?"} end)
