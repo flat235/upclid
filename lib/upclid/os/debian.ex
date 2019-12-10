@@ -1,7 +1,6 @@
 defmodule Upclid.Os.Debian do
   use Upclid.Collector
   use Upclid.Action
-  require Logger
 
   # Collector implementation
 
@@ -41,10 +40,7 @@ defmodule Upclid.Os.Debian do
   # Action implementation
 
   def do_update do
-    result = System.cmd("sudo",["--preserve-env", "apt-get", "-y", "-o", "Dpkg::Options::=\"--force-confdef\"", "-o", "Dpkg::Options::=\"--force-confold\"", "dist-upgrade"], env: [{"DEBIAN_FRONTEND", "noninteractive"}])
-    {res, _exit_status} = result
-    Logger.info(res)
-    result
+    :os.cmd('DEBIAN_FRONTEND=noninteractive sudo --preserve-env apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade')
   end
 
   def do_lock(pkg) do

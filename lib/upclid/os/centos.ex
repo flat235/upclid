@@ -36,7 +36,7 @@ defmodule Upclid.Os.CentOS do
   # Action implementation
 
   def do_update do
-    System.cmd("sudo", ["yum", "-y", "update"])
+    :os.cmd('sudo yum -y update')
   end
 
   def do_lock(pkg) do
