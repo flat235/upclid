@@ -15,6 +15,7 @@ Upclid is the client, which reports pending updates, wanted reboots, locked pack
  - sending information about pending updates
  - sending information about pending reboot
  - sending information about locked packages
+ - sending log of last update
  - debian-based-distros supported
  - centos / RHEL(probably...) supported
  - executing updates
