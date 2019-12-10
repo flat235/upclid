@@ -41,8 +41,10 @@ defmodule Upclid.Os.Debian do
   # Action implementation
 
   def do_update do
-    res = :os.cmd('DEBIAN_FRONTEND=noninteractive sudo --preserve-env apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade')
+    result = System.cmd("sudo",["--preserve-env", "apt-get", "-y", "-o", "Dpkg::Options::=\"--force-confdef\"", "-o", "Dpkg::Options::=\"--force-confold\"", "dist-upgrade"], env: [{"DEBIAN_FRONTEND", "noninteractive"}])
+    {res, _exit_status} = result
     Logger.info(res)
+    result
   end
 
   def do_lock(pkg) do

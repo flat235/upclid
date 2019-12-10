@@ -45,7 +45,8 @@ defmodule Upclid.Reporter do
 
     if Map.get(clearances, "update", "false") == "true" do
       Logger.info "update authorized"
-      Upclid.Action.update()
+      {log, exit_code} = Upclid.Action.update()
+      HTTPoison.post "#{url}/result/#{name}", Poison.encode!(%{"log" => log, "exit_code" => exit_code}), [{"Content-Type", "application/json"}]
     end
     upkg = Map.get(clearances, "unlock", "")
     if upkg != "" do
