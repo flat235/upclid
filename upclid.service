@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/opt/upclid
-ExecStart=/opt/upclid/bin/upclid foreground
+ExecStart=/opt/upclid/bin/upclid start
 ExecStop=/opt/upclid/bin/upclid stop
 ExecReload=/opt/upclid/bin/upclid restart
 Restart=on-failure

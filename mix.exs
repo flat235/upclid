@@ -7,7 +7,15 @@ defmodule Upclid.MixProject do
       version: "0.2.2",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: [
+        upclid: [
+          include_executables_for: [:unix],
+          config_providers: [
+            {TomlConfigProvider, path: "/etc/upclid.toml"}
+          ]
+        ]
+      ]
     ]
   end
 
@@ -22,10 +30,9 @@ defmodule Upclid.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.1"},
+      {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
-      {:toml, "~> 0.3"},
-      {:distillery, "~> 2.0", runtime: true}
+      {:toml_config, "~> 0.1"}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
